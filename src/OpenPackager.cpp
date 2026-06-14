@@ -34,7 +34,7 @@ void OpenPackager::StartUp()
     OpenPackagerInfo->version_major = 0;
     OpenPackagerInfo->version_minor = 1;
     OpenPackagerInfo->entranceStage = std::move(preloadStage);
-    OpenPackagerInfo->gameName = "OpenPackager 脚本设计器";
+    OpenPackagerInfo->gameName = "OpenPackager 打包工具";
 
     OCore.GameRegistry(std::move(OpenPackagerInfo));
 
