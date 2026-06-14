@@ -26,7 +26,9 @@ void OpenPackager::StartUp()
     gInfo.nearestScaling = false;
     gInfo.resolutionWidth = 3840;
     gInfo.resolutionHeight = 2160;
-    gInfo.targetFrameRate = 144;
+    gInfo.targetFrameRate = 30;
+    gInfo.keepRatio = true;
+    gInfo.resizable = false;
 
     auto OpenPackagerInfo = std::make_unique<GameInfo>();
     OpenPackagerInfo->_graphicsInfo = gInfo;

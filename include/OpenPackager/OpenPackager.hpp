@@ -13,6 +13,7 @@
 
 #include "OpenCore.hpp"
 #include "Stage/PreloadStage.hpp"
+#include "Stage/WorktableStage.hpp"
 
 class OpenPackager
 {

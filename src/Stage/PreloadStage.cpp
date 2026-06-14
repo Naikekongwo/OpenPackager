@@ -1,7 +1,6 @@
-#include "OpenPackager/Stage/PreloadStage.hpp"
 #include "OpenCore.hpp"
-#include "Runtime/Graphics/Manager/ElementManager.hpp"
-#include "World/Stage/StageManager.hpp"
+#include "OpenPackager/OpenPackager.hpp"
+#include <memory>
 
 PreloadStage::PreloadStage(Timer *timer, StageManager *sController)
     : OverlayStage(timer, sController, StageType::overlayStage)
@@ -59,7 +58,17 @@ void PreloadStage::initializeComponents()
         .next(
             [this]() -> bool
             {
+                auto *framecounter = Elements->find("frameCounter");
+                return framecounter && framecounter->isAnimeFinished();
+            })
+        .next(
+            [this]() -> bool
+            {
                 sController->removeStage(StageType::overlayStage);
+
+                auto workstage =
+                    std::make_unique<WorktableStage>(timer, sController);
+                sController->changeStage(std::move(workstage));
                 return true;
             });
 }
