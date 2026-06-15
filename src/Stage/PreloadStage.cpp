@@ -2,10 +2,7 @@
 #include "OpenPackager/OpenPackager.hpp"
 #include <memory>
 
-PreloadStage::PreloadStage(Timer *timer, StageManager *sController)
-    : OverlayStage(timer, sController, StageType::overlayStage)
-{
-}
+PreloadStage::PreloadStage() {}
 
 void PreloadStage::onEnter()
 {
@@ -66,8 +63,7 @@ void PreloadStage::initializeComponents()
             {
                 sController->removeStage(StageType::overlayStage);
 
-                auto workstage =
-                    std::make_unique<WorktableStage>(timer, sController);
+                auto workstage = std::make_unique<WorktableStage>();
                 sController->changeStage(std::move(workstage));
                 return true;
             });

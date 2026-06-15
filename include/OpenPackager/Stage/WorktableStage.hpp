@@ -5,7 +5,7 @@
 class WorktableStage : public BaseStage
 {
   public:
-    WorktableStage(Timer *timer, StageManager *sController);
+    WorktableStage();
     ~WorktableStage() override = default;
 
     bool parseEvents(Event *event) override;

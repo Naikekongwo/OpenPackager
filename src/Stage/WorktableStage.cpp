@@ -6,10 +6,7 @@
 #include "World/Stage/BaseStage.hpp"
 #include "World/Stage/StageManager.hpp"
 
-WorktableStage::WorktableStage(Timer *timer, StageManager *sController)
-    : BaseStage(timer, sController, StageType::baseStage)
-{
-}
+WorktableStage::WorktableStage() {}
 
 void WorktableStage::onEnter() { initializeComponents(); }
 

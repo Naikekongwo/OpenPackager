@@ -20,7 +20,7 @@ class Event;
 class PreloadStage : public OverlayStage
 {
   public:
-    PreloadStage(Timer *timer, StageManager *sController);
+    PreloadStage();
     ~PreloadStage() override = default;
 
     bool parseEvents(Event *event) override;

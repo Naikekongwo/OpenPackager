@@ -11,16 +11,7 @@ void OpenPackager::StartUp()
 
     auto &OCore = OpenEngine::getInstance();
 
-    if (!OCore.Initialize())
-    {
-        LOG("OpenCore 引擎在初始化时出现问题");
-        return;
-    }
-
-    auto timer = OCore.getTimer();
-    auto sCon = OCore.getStageController();
-
-    auto preloadStage = std::make_unique<PreloadStage>(timer, sCon);
+    auto preloadStage = std::make_unique<PreloadStage>();
 
     GraphicsInfo gInfo;
     gInfo.nearestScaling = false;
@@ -42,6 +33,11 @@ void OpenPackager::StartUp()
 
     try
     {
+        if (!OCore.Initialize())
+        {
+            LOG("OpenCore 引擎在初始化时出现问题");
+            return;
+        }
         OCore.MainLoop();
         OCore.CleanUp();
     }
