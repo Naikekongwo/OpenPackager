@@ -1,4 +1,5 @@
 #include "OpenPackager/OpenPackager.hpp"
+#include "Asset/PackageManager.hpp"
 #include "OpenCore.hpp"
 #include "OpenPackager/Stage/PreloadStage.hpp"
 #include <exception>
@@ -31,13 +32,23 @@ void OpenPackager::StartUp()
 
     OCore.GameRegistry(std::move(OpenPackagerInfo));
 
+    if (!OCore.Initialize())
+    {
+        LOG("OpenCore 引擎在初始化时出现问题");
+        return;
+    }
+
+    auto Package = OCore.getPackageManager();
+
+    Package->registerResource(RscFont, "Font_Eng",
+                              "assets/ui/OpenCoreFont.ttf");
+    Package->registerResource(RscFont, "Font_Eng",
+                              "assets/ui/OpenCoreFont.ttf");
+    Package->registerResource(RscFont, "Font_Eng",
+                              "assets/ui/OpenCoreFont.ttf");
+
     try
     {
-        if (!OCore.Initialize())
-        {
-            LOG("OpenCore 引擎在初始化时出现问题");
-            return;
-        }
         OCore.MainLoop();
         OCore.CleanUp();
     }
