@@ -37,5 +37,4 @@ class PreloadStage : public OverlayStage
     void onDestroy() override;
 
   private:
-    std::future<void> LoadingState;
 };

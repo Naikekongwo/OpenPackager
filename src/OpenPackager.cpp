@@ -15,20 +15,26 @@ void OpenPackager::StartUp()
     auto preloadStage = std::make_unique<PreloadStage>();
 
     GraphicsInfo gInfo;
-    gInfo.nearestScaling = false;
-    gInfo.resolutionWidth = 3840;
+    gInfo.nearestScaling   = false;
+    gInfo.resolutionWidth  = 3840;
     gInfo.resolutionHeight = 2160;
-    gInfo.targetFrameRate = 30;
-    gInfo.keepRatio = true;
-    gInfo.resizable = false;
+    gInfo.targetFrameRate  = 30;
+    gInfo.keepRatio        = true;
+    gInfo.resizable        = false;
 
-    auto OpenPackagerInfo = std::make_unique<GameInfo>();
+    ResourceInfo rInfo;
+    rInfo.packageOnly                = false;
+    rInfo.keepStructureWhenPackaging = true;
+    rInfo.textureResampleFactor      = 1.0f;
+
+    auto OpenPackagerInfo           = std::make_unique<GameInfo>();
     OpenPackagerInfo->_graphicsInfo = gInfo;
-    OpenPackagerInfo->beta = true;
+    OpenPackagerInfo->_resourceInfo = rInfo;
+    OpenPackagerInfo->beta          = true;
     OpenPackagerInfo->version_major = 0;
     OpenPackagerInfo->version_minor = 1;
     OpenPackagerInfo->entranceStage = std::move(preloadStage);
-    OpenPackagerInfo->gameName = "OpenPackager 打包工具";
+    OpenPackagerInfo->gameName      = "OpenPackager 打包工具";
 
     OCore.GameRegistry(std::move(OpenPackagerInfo));
 
@@ -42,11 +48,8 @@ void OpenPackager::StartUp()
 
     Package->registerResource(RscFont, "Font_Eng",
                               "assets/ui/OpenCoreFont.ttf");
-    Package->registerResource(RscFont, "Font_Eng",
-                              "assets/ui/OpenCoreFont.ttf");
-    Package->registerResource(RscFont, "Font_Eng",
-                              "assets/ui/OpenCoreFont.ttf");
-
+    Package->registerResource(RscTexture, "CORE_LOGO",
+                              "assets/ui/opencore_logo.png");
     try
     {
         OCore.MainLoop();
