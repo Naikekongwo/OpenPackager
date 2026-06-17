@@ -3,6 +3,7 @@
 #include "OpenCore.hpp"
 #include "OpenPackager/Stage/PreloadStage.hpp"
 #include <exception>
+#include <iostream>
 #include <memory>
 
 void OpenPackager::StartUp()

@@ -35,14 +35,18 @@ void PreloadStage::onRender() { Elements->onRender(); }
 void PreloadStage::initializeComponents()
 {
 
-    auto frameCounter = UI<FrameCounter>("frameCounter", 100, 0, 0, 0);
+    auto frameCounter = UI<FrameCounter>("frameCounter", 100, "", 0, 0);
     frameCounter->Configure().Sequence(true);
     frameCounter->setFontName("Font_Eng");
     frameCounter->setFontSize(36);
     frameCounter->Animate().Timer(6.0f).Commit();
     Elements->PushElement(std::move(frameCounter));
 
-    auto logo = UI<ImageBoard>("core_logo", 5, 0, 0, 0);
+    auto TexMgr = OpenEngine::getInstance().getTextureMetaManager();
+
+    TexMgr->registerTextureMeta({"CORE_LOGO", 1, 1});
+
+    auto logo = UI<ImageBoard>("core_logo", 5, "", 0, 0);
     logo->Configure()
         .Parent(nullptr)
         .Anchor(AnchorPoint::Center)
@@ -50,7 +54,11 @@ void PreloadStage::initializeComponents()
         .Scale(0.5f, 0.25f * widthheight)
         .Alpha(1.0f);
 
-    logo->changeTexture(MakeTextureFromPkg(1, 1, "CORE_LOGO"));
+    logo->setBackgroundColor({255, 255, 255, 100});
+
+    auto texture = TexMgr->getTexture("CORE_LOGO");
+    if (texture.has_value())
+        logo->changeTexture(texture.value());
 
     Elements->PushElement(std::move(logo));
 

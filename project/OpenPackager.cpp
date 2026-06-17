@@ -1,6 +1,7 @@
 #include "OpenPackager/OpenPackager.hpp"
 #include <cstdlib>
 #include <exception>
+#include <iostream>
 
 int main(int argc, char **args)
 {
