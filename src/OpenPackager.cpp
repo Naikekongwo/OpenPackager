@@ -47,10 +47,13 @@ void OpenPackager::StartUp()
 
     auto Package = OCore.getPackageManager();
 
+#pragma region 注册纹理资源
     Package->registerResource(RscFont, "Font_Eng",
                               "assets/ui/OpenCoreFont.ttf");
     Package->registerResource(RscTexture, "CORE_LOGO",
                               "assets/ui/opencore_logo.png");
+#pragma endregion
+
     try
     {
         OCore.MainLoop();

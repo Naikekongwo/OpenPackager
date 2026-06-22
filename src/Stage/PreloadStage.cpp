@@ -1,8 +1,6 @@
-#include "Core/Macros.hpp"
 #include "OpenCore.hpp"
 #include "OpenPackager/OpenPackager.hpp"
-#include "Runtime/Animation/IAnimation.hpp"
-#include "Runtime/Graphics/UI/ImageBoard.hpp"
+
 #include <cstddef>
 #include <memory>
 
@@ -42,11 +40,9 @@ void PreloadStage::initializeComponents()
     frameCounter->Animate().Timer(6.0f).Commit();
     Elements->PushElement(std::move(frameCounter));
 
-    auto TexMgr = OpenEngine::getInstance().getTextureMetaManager();
+    auto Package = OpenEngine::getInstance().getPackageManager();
 
-    TexMgr->registerTextureMeta({"CORE_LOGO", 1, 1});
-
-    auto logo = UI<ImageBoard>("core_logo", 5, "", 0, 0);
+    auto logo = UI<ImageBoard>("core_logo", 5, "CORE_LOGO", 1, 1);
     logo->Configure()
         .Parent(nullptr)
         .Anchor(AnchorPoint::Center)
@@ -54,11 +50,9 @@ void PreloadStage::initializeComponents()
         .Scale(0.5f, 0.25f * widthheight)
         .Alpha(1.0f);
 
-    logo->setBackgroundColor({255, 255, 255, 100});
+    // logo->setBackgroundColor({255, 255, 255, 100});
 
-    auto texture = TexMgr->getTexture("CORE_LOGO");
-    if (texture.has_value())
-        logo->changeTexture(texture.value());
+    logo->changeTexture(Package->getTextureObject({"CORE_LOGO", 1, 1}));
 
     Elements->PushElement(std::move(logo));
 
