@@ -34,7 +34,7 @@ void WorktableStage::onRender() { Elements->onRender(); }
 
 void WorktableStage::initializeComponents()
 {
-    auto toolmenu = std::make_unique<ToolMenu>("toolmenu", 50, nullptr);
+    auto toolmenu = std::make_unique<ToolMenu>("toolmenu", 50);
 
     toolmenu->Configure()
         .Parent(nullptr)
@@ -42,7 +42,21 @@ void WorktableStage::initializeComponents()
         .Scale(1.0f, 120.0f)
         .Posite(0.0f, 0.0f);
 
-    toolmenu->setBackgroundColor({128, 255, 255, 255});
+    toolmenu->setBackgroundColor({0.5f, 1.0f, 1.0f, 1.0f});
 
     Elements->PushElement(std::move(toolmenu));
+
+    auto text = std::make_unique<TextArea>("text", 99, "Font_Eng");
+
+    text->Configure()
+        .Parent(nullptr)
+        .Anchor(AnchorPoint::Center)
+        .Scale(1.0f, 0.2f)
+        .Posite(0.5f, 0.5f);
+
+    text->setFontSize(100);
+    text->setText("We are the world!");
+    text->alignCenter(true);
+
+    Elements->PushElement(std::move(text));
 }
