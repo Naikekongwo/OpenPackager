@@ -2,6 +2,7 @@
 #include "OpenCore.hpp"
 #include "Runtime/Animation/IAnimation.hpp"
 #include "Runtime/Graphics/Manager/ElementManager.hpp"
+#include "Runtime/Graphics/UI/Button.hpp"
 #include "Runtime/Graphics/UI/ToolMenu.hpp"
 #include "World/Stage/BaseStage.hpp"
 #include "World/Stage/StageManager.hpp"
@@ -59,4 +60,18 @@ void WorktableStage::initializeComponents()
     text->alignCenter(true);
 
     Elements->PushElement(std::move(text));
+
+    auto btn = std::make_unique<Button>("btn", 99, nullptr);
+
+    btn->setButtonStyle(ButtonStyle::Text);
+    btn->setButtonText("btn_text");
+
+    btn->Configure()
+        .Parent(nullptr)
+        .Anchor(AnchorPoint::MiddleLeft)
+        .Posite(0.0f, 0.5f)
+        .Scale(0.5f, 0.2f);
+
+    btn->setBackgroundColor({0.0f, 0.0f, 1.0f, 1.0f});
+    Elements->PushElement(std::move(btn));
 }
